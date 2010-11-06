@@ -11,22 +11,18 @@ namespace NewSock
 {
     Sock::Sock(int sockFD)
     {
-        memset(&fSockaddr, 0, sizeof(fSockaddr));
+        Init();
 
         if (sockFD)
             fSockFD = sockFD;
         else
             fSockFD = -1;
-
-        fBufLength = 0;
-
-        fBuf = new char[BufSize];
-        memset(fBuf, 0, BufSize);
     }
-
 
     Sock::Sock(int domain, int type, int protocol, Throw fThrow)
     {
+        Init();
+
         fSockFD = socket(domain, type, protocol);
 
         if (fThrow)
@@ -36,11 +32,6 @@ namespace NewSock
                 Error.SetErrorMessageByErrorID(errno, "Socket(int domain, int type, int protocol)");
                 throw Error;
             }
-
-        fBufLength = 0;
-
-        fBuf = new char[BufSize];
-        memset(fBuf, 0, BufSize);
     }
 
 
@@ -319,5 +310,16 @@ namespace NewSock
     {
         const float NewSockLibVERSION = 1.0;
         return NewSockLibVERSION;
+    }
+
+
+    void Sock::Init()
+    {
+        fBufLength = 0;
+
+        memset(&fSockaddr, 0, sizeof(fSockaddr));
+
+        fBuf = new char[BufSize];
+        memset(fBuf, 0, BufSize);
     }
 }

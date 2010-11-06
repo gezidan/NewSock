@@ -75,6 +75,8 @@ namespace NewSock
         const float NewSockLibVersion() const;
 
     private:
+        void Init();
+
         int fSockFD;
         struct sockaddr fSockaddr;
         int fBufLength;
