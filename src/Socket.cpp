@@ -290,6 +290,7 @@ namespace NewSock
     Sock &Sock::operator<<(const std::string &fMessage)
     {
         Send(fMessage.c_str(), fMessage.length());
+
         return *this;
     }
 
@@ -303,6 +304,7 @@ namespace NewSock
         fStream >> fMessage;
 
         Send(fMessage.c_str(), fMessage.length());
+
         return *this;
     }
 
@@ -314,6 +316,7 @@ namespace NewSock
 
         for (register int i = 0; i < fBufLength; i++)
             fMessage += fBuf[i];
+
         return fResult;
     }
 
@@ -321,6 +324,7 @@ namespace NewSock
     const float Sock::NewSockLibVersion() const
     {
         const float NewSockLibVERSION = 1.0;
+
         return NewSockLibVERSION;
     }
 
