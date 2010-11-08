@@ -35,6 +35,18 @@ namespace NewSock
     }
 
 
+    Sock::Sock(Sock &fSock)
+    {
+        Init();
+
+        fSockFD = fSock.GetSockFD();
+        fBufLength = fSock.GetBufLength();
+
+        for (register int i = 0; i < fBufLength; i++)
+            fBuf[i] = fSock.GetBuf()[i];
+    }
+
+
     Sock::~Sock()
     {
         if (fSockFD != -1)
@@ -316,8 +328,6 @@ namespace NewSock
     void Sock::Init()
     {
         fBufLength = 0;
-
-        memset(&fSockaddr, 0, sizeof(fSockaddr));
 
         fBuf = new char[BufSize];
         memset(fBuf, 0, BufSize);

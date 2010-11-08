@@ -45,6 +45,7 @@ namespace NewSock
     public:
         Sock(int sockFD = -1);
         Sock(int domain, int type, int protocol, Throw fThrow = SockThrow);
+        Sock(Sock &fSock);
         ~Sock();
 
         virtual int Accept(struct sockaddr *addr, Throw fThrow = SockThrow);
@@ -78,7 +79,6 @@ namespace NewSock
         void Init();
 
         int fSockFD;
-        struct sockaddr fSockaddr;
         int fBufLength;
         char *fBuf;
     };
